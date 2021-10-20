@@ -18,13 +18,13 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     listlower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
     listupper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i in range(len(plaintext)):
-        change_letter = plaintext[i]
-        if change_letter.isupper():
-            indexone = listupper.find(change_letter)
+        changed_letter = plaintext[i]
+        if changed_letter.isupper():
+            indexone = listupper.find(changed_letter)
             index = indexone + (shift % 26)
             ciphertext += listupper[index]
-        elif change_letter.islower():
-            indexone = listlower.find(change_letter)
+        elif changed_letter.islower():
+            indexone = listlower.find(changed_letter)
             index = indexone + (shift % 26)
             ciphertext += listlower[index]
         else:
