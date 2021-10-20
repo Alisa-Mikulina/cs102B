@@ -49,17 +49,17 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     listlower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
     listupper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i in range(len(ciphertext)):
-        change_letter = ciphertext[i]
-        if change_letter.isupper():
-            indexone = listupper.find(change_letter)
+        changed_letter = ciphertext[i]
+        if changed_letter.isupper():
+            indexone = listupper.find(changed_letter)
             index = indexone - (shift % 26)
             plaintext += listupper[index]
-        elif change_letter.islower():
-            indexone = listlower.find(change_letter)
+        elif changed_letter.islower():
+            indexone = listlower.find(changed_letter)
             index = indexone - (shift % 26)
             plaintext += listlower[index]
         else:
-            plaintext += change_letter
+            plaintext += changed_letter
     return plaintext
 
 
