@@ -15,8 +15,8 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    listlower = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
-    listupper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    listlower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+    listupper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i in range(len(plaintext)):
         changed_letter = plaintext[i]
         if changed_letter.isupper():
@@ -29,8 +29,8 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
             ciphertext += listlower[index]
         else:
             ciphertext += changed_letter
-    return(ciphertext)
-    
+    return ciphertext
+
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
@@ -46,8 +46,8 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    listlower = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
-    listupper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    listlower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+    listupper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i in range(len(ciphertext)):
         changed_letter = ciphertext[i]
         if changed_letter.isupper():
@@ -60,7 +60,7 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
             plaintext += listlower[index]
         else:
             plaintext += changed_letter
-    return (plaintext)
+    return plaintext
 
 
 def caesar_breaker_brute_force(ciphertext: str, dictionary: tp.Set[str]) -> int:
