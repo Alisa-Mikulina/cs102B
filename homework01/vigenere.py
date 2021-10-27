@@ -61,8 +61,8 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     shift = 0
     end_counter = len(keyword) - 1
 
-    for char in ciphertext:
-        line.append(char)
+    for ch in ciphertext:
+        line.append(ch)
 
     for i in range(len(line)):
         if not line[i].isnumeric():
