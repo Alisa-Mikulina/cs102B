@@ -26,8 +26,7 @@ def display(grid: tp.List[tp.List[str]]) -> None:
     for row in range(9):
         print(
             "".join(
-                grid[row][col].center(width) + ("|" if str(col) in "25" else "")
-                for col in range(9)
+                grid[row][col].center(width) + ("|" if str(col) in "25" else "") for col in range(9)
             )
         )
         if str(row) in "25":
@@ -72,10 +71,10 @@ def get_col(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     >>> get_col([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (0, 2))
     ['3', '6', '9']
     """
-    col = []
+    column = []
     for i in range(len(grid)):
-        col.append(grid[i][pos[1]])
-    return col
+        column.append(grid[i][pos[1]])
+    return column
 
 
 def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
@@ -131,9 +130,7 @@ def find_empty_positions(
                 return -1
 
 
-def find_possible_values(
-    grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]
-) -> tp.Set[str]:
+def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.Set[str]:
     """Вернуть множество возможных значения для указанной позиции
     >>> grid = read_sudoku('puzzle1.txt')
     >>> values = find_possible_values(grid, (0,2))
@@ -149,11 +146,7 @@ def find_possible_values(
     local_block = get_block(grid, pos)
     possible_values = set()
     for value in allowed_values:
-        if (
-            value not in local_row
-            and value not in local_col
-            and value not in local_block
-        ):
+        if value not in local_row and value not in local_col and value not in local_block:
             possible_values.add(value)
     return possible_values
 
