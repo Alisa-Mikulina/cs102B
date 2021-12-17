@@ -85,4 +85,4 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     for elem in line:
         plaintext += elem
 
-    return plaintext
+    return plaintex
