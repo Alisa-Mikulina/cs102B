@@ -117,9 +117,10 @@ class GameOfLife:
         self.prev_generation = deepcopy(self.curr_generation)
         self.curr_generation = self.get_next_generation()
         self.generations += 1
+        return None
 
     @property
-    def is_max_generations_exceeded(self) -> bool:
+    def is_max_generations_exceeded(self):
         """
         Не превысило ли текущее число поколений максимально допустимое.
         """
@@ -127,6 +128,7 @@ class GameOfLife:
             if self.generations < self.max_generations:
                 return False
             return True
+        return None
 
     @property
     def is_changing(self) -> bool:

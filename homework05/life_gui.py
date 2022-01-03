@@ -65,11 +65,11 @@ class GUI(UI):
             and (self.life.is_changing is True)
         ):
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
-                elif event.type == KEYDOWN:
+                elif event.type == pygame.KEYDOWN:
                     pause = not pause
-                elif event.type == MOUSEBUTTONUP:
+                elif event.type == pygame.MOUSEBUTTONUP:
                     i, j = event.pos
                     i = i // self.cell_size
                     j = j // self.cell_size
