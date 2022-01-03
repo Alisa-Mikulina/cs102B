@@ -140,7 +140,7 @@ class GameOfLife:
     @staticmethod
     def from_file(filename) -> "GameOfLife":
         """
-        Прочитать состояние клеток из указанного файла. 
+        Прочитать состояние клеток из указанного файла.
         """
         with open(filename, "r") as f:
             line = f.readlines()
@@ -153,7 +153,7 @@ class GameOfLife:
 
     def save(self, filename) -> None:
         """
-        Сохранить текущее состояние клеток в указанный файл. 
+        Сохранить текущее состояние клеток в указанный файл.
         """
         with open(filename, "w") as f:
             for row in self.curr_generation:
