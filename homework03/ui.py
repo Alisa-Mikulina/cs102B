@@ -1,8 +1,8 @@
 import abc
-import pygame
-from pygame.locals import *
 
+import pygame
 from life import GameOfLife
+from pygame.locals import *
 
 
 class UI(abc.ABC):

@@ -1,7 +1,8 @@
 import curses
+from time import sleep
+
 from life import GameOfLife
 from ui import UI
-from time import sleep
 
 
 class Console(UI):
