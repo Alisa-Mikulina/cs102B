@@ -1,4 +1,6 @@
 import abc
+import pygame
+from pygame.locals import *
 
 from life import GameOfLife
 
