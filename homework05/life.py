@@ -47,9 +47,7 @@ class GameOfLife:
         if not randomize:
             Grid = [[0 for i in range(self.cols)] for p in range(self.rows)]
             return Grid
-        Grid = [
-            [random.choice([0, 1]) for i in range(self.cols)] for p in range(self.rows)
-        ]
+        Grid = [[random.choice([0, 1]) for i in range(self.cols)] for p in range(self.rows)]
         return Grid
 
     def get_neighbours(self, cell: Cell) -> Cells:
@@ -141,7 +139,7 @@ class GameOfLife:
 
     @staticmethod
     def from_file(filename) -> "GameOfLife":
-        """ 
+        """
         Прочитать состояние клеток из указанного файла. 
         """
         with open(filename, "r") as f:
@@ -154,7 +152,7 @@ class GameOfLife:
         return game
 
     def save(self, filename) -> None:
-        """ 
+        """
         Сохранить текущее состояние клеток в указанный файл. 
         """
         with open(filename, "w") as f:
