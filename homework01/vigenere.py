@@ -10,35 +10,30 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     'LXFOPVEFRNHR'
     """
     ciphertext = ""
-    line = []
-    list_lower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
-    list_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    counter = 0
-    shift = 0
-    end_counter = len(keyword) - 1
+    upper_index = ord("A")
+    lower_index = ord("a")
 
-    for char in plaintext:
-        line.append(char)
+    word_len = len(plaintext)
+    key_len = len(keyword)
+    shift = []
+    for i in range(word_len):
+        indexone = ord(plaintext[i])
+        if plaintext[i].isupper():
+            local_first = indexone - upper_index
+            temporary_shift = local_first + (ord(keyword[i % key_len]) - upper_index)
+            local_final = temporary_shift % 26
+            shift.append(upper_index + local_final)
+        elif plaintext[i].islower():
+            local_first = indexone - lower_index
+            temporary_shift = local_first + (ord(keyword[i % key_len]) - lower_index)
+            local_final = temporary_shift % 26
+            shift.append(lower_index + local_final)
+        else:
+            shift.append(indexone)
 
-    for i in range(len(line)):
-        if not line[i].isnumeric():
-            if line[i].isupper():
-                shift = list_upper.index(keyword[counter].upper())
-                line[i] = list_upper[list_upper.index(line[i]) + shift]
-                if counter == end_counter:
-                    counter = 0
-                else:
-                    counter += 1
-            if line[i].islower():
-                shift = list_lower.index(keyword[counter].lower())
-                line[i] = list_lower[list_lower.index(line[i]) + shift]
-                if counter == end_counter:
-                    counter = 0
-                else:
-                    counter += 1
+    for i in range(word_len):
+        ciphertext += chr(shift[i])
 
-    for elem in line:
-        ciphertext += elem
     return ciphertext
 
 
@@ -54,35 +49,32 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    line = []
-    list_lower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
-    list_upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    counter = 0
-    shift = 0
-    end_counter = len(keyword) - 1
+    upper_index = ord("A")
+    lower_index = ord("a")
 
-    for ch in ciphertext:
-        line.append(ch)
+    word_len = len(ciphertext)
+    key_len = len(keyword)
+    shift = []
+    for i in range(word_len):
+        indexone = ord(ciphertext[i])
+        if ciphertext[i].isupper():
+            local_first = indexone - upper_index
+            temporary_shift = local_first - (ord(keyword[i % key_len]) - upper_index)
+            if temporary_shift < 0:
+                temporary_shift += 26
+            local_final = temporary_shift % 26
+            shift.append(upper_index + local_final)
+        elif ciphertext[i].islower():
+            local_first = indexone - lower_index
+            temporary_shift = local_first - (ord(keyword[i % key_len]) - lower_index)
+            if temporary_shift < 0:
+                temporary_shift += 26
+            local_final = temporary_shift % 26
+            shift.append(lower_index + local_final)
+        else:
+            shift.append(indexone)
 
-    for i in range(len(line)):
-        if not line[i].isnumeric():
-            if line[i].isupper():
-                shift = list_upper.index(keyword[counter].upper())
-                line[i] = list_upper[list_upper.index(line[i]) - shift]
-                if counter == end_counter:
-                    counter = 0
-                else:
-                    counter += 1
-            if line[i].islower():
-                shift = list_lower.index(keyword[counter].lower())
-                line[i] = list_lower[list_lower.index(line[i]) + shift]
-                if counter == end_counter:
-                    counter = 0
-                else:
-                    counter += 1
-
-    plaintext = ""
-    for elem in line:
-        plaintext += elem
+    for i in range(word_len):
+        plaintext += chr(shift[i])
 
     return plaintext
