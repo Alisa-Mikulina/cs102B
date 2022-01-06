@@ -171,7 +171,7 @@ def solve(grid: tp.List[tp.List[str]]):
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
-    # TODO: Add doctests with bad puzzles
+    # TODO: Add doctest with bad puzzles
     for i in range(len(solution)):
         for j in range(len(solution)):
             elem = solution[i][j]
