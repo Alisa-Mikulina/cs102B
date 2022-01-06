@@ -12,7 +12,6 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     ciphertext = ""
     upper_index = ord("A")
     lower_index = ord("a")
-
     word_len = len(plaintext)
     key_len = len(keyword)
     shift = []
@@ -51,7 +50,6 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     plaintext = ""
     upper_index = ord("A")
     lower_index = ord("a")
-
     word_len = len(ciphertext)
     key_len = len(keyword)
     shift = []
@@ -78,3 +76,4 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         plaintext += chr(shift[i])
 
     return plaintext
+
