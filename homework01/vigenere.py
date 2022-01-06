@@ -71,7 +71,6 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
             shift.append(lower_index + local_final)
         else:
             shift.append(indexone)
-
     for i in range(word_len):
         plaintext += chr(shift[i])
 
