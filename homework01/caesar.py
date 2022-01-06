@@ -15,18 +15,22 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    listlower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
-    listupper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    for i in range(len(plaintext)):
-        changed_letter = plaintext[i]
+    upper_index = ord("A")
+    lower_index = ord("a")
+    for changed_letter in plaintext:
+        indexone = ord(changed_letter)
         if changed_letter.isupper():
-            indexone = listupper.find(changed_letter)
-            index = indexone + (shift % 26)
-            ciphertext += listupper[index]
+            local_first = indexone - upper_index
+            temporary_shift = local_first + shift
+            local_final = temporary_shift % 26
+            index = upper_index + local_final
+            ciphertext += chr(index)
         elif changed_letter.islower():
-            indexone = listlower.find(changed_letter)
-            index = indexone + (shift % 26)
-            ciphertext += listlower[index]
+            local_first = indexone - lower_index
+            temporary_shift = local_first + shift
+            local_final = temporary_shift % 26
+            index = lower_index + local_final
+            ciphertext += chr(index)
         else:
             ciphertext += changed_letter
     return ciphertext
@@ -46,18 +50,26 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    listlower = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
-    listupper = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    for i in range(len(ciphertext)):
-        changed_letter = ciphertext[i]
+    upper_index_start = ord("A")
+    lower_index_start = ord("a")
+    for changed_letter in ciphertext:
+        indexone = ord(changed_letter)
         if changed_letter.isupper():
-            indexone = listupper.find(changed_letter)
-            index = indexone - (shift % 26)
-            plaintext += listupper[index]
+            local_first = indexone - upper_index_start
+            temporary_shift = local_first - shift
+            if temporary_shift < 0:
+                temporary_shift += 26
+            local_final = temporary_shift % 26
+            index = upper_index_start + local_final
+            plaintext += chr(index)
         elif changed_letter.islower():
-            indexone = listlower.find(changed_letter)
-            index = indexone - (shift % 26)
-            plaintext += listlower[index]
+            local_first = indexone - lower_index_start
+            temporary_shift = local_first - shift
+            if temporary_shift < 0:
+                temporary_shift += 26
+            local_final = temporary_shift % 26
+            index = lower_index_start + local_final
+            plaintext += chr(index)
         else:
             plaintext += changed_letter
     return plaintext
