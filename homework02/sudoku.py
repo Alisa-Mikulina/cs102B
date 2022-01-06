@@ -71,10 +71,7 @@ def get_col(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     >>> get_col([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (0, 2))
     ['3', '6', '9']
     """
-    column = []
-    for i in range(len(grid)):
-        column.append(grid[i][pos[1]])
-    return column
+    return [grid[i][pos[1]] for i in range(len(grid))]
 
 
 def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
@@ -87,27 +84,10 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     >>> get_block(grid, (8, 8))
     ['2', '8', '.', '.', '.', '5', '.', '7', '9']
     """
-    block = []
-    block_cd = []
-    if 0 <= pos[0] <= 2:
-        block_cd.append(0)
-    elif 3 <= pos[0] <= 5:
-        block_cd.append(1)
-    else:
-        block_cd.append(2)
+    f_row = pos[0] // 3 * 3
+    f_col = pos[1] // 3 * 3
 
-    if 0 <= pos[1] <= 2:
-        block_cd.append(0)
-    elif 3 <= pos[1] <= 5:
-        block_cd.append(1)
-    else:
-        block_cd.append(2)
-
-    for i in range(3):
-        for j in range(3):
-            block.append(grid[i + block_cd[0] * 3][j + +block_cd[1] * 3])
-
-    return block
+    return [grid[row][column] for row in range(f_row, f_row + 3) for column in range(f_col, f_col + 3)]
 
 
 def find_empty_positions(
@@ -167,7 +147,7 @@ def solve(grid: tp.List[tp.List[str]]):
     if position_to_work_on == -1:
         return grid
     possible_values = find_possible_values(grid, position_to_work_on)
-    if possible_values == {}:
+    if not possible_values:
         return False
     for value in possible_values:
         grid[position_to_work_on[0]][position_to_work_on[1]] = value
