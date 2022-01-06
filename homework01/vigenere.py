@@ -75,4 +75,3 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         plaintext += chr(shift[i])
 
     return plaintext
-
