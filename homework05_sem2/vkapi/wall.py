@@ -103,9 +103,7 @@ def get_wall_execute(
         "v": VK_CONFIG["version"],
     }
     response = s.post("execute", data=data)
-    actual_response = get_posts_2500(
-        owner_id=owner_id, domain=domain, count=count, filter=filter
-    )
+    actual_response = get_posts_2500(owner_id=owner_id, domain=domain, count=count, filter=filter)
     time.sleep(2)
     return actual_response
 
