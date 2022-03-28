@@ -10,7 +10,7 @@ from vkapi.friends import FriendsResponse, get_friends, get_mutual
 
 def ego_network(
     user_id: tp.Optional[int] = 448281460, friends: tp.Optional[tp.List[int]] = None
-) -> set[tuple[int, int]]:
+) -> tp.Set[tp.Tuple[int, int]]:
     """
     Построить эгоцентричный граф друзей.
     :param user_id: Идентификатор пользователя, для которого строится граф друзей.
