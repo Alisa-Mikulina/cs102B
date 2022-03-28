@@ -30,18 +30,14 @@ class GameOfLife:
         self.speed = speed
 
     def draw_lines(self) -> None:
-        """ Отрисовать сетку """
+        """Отрисовать сетку"""
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (x, 0), (x, self.height)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (0, y), (self.width, y)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
 
     def run(self) -> None:
-        """ Запустить игру """
+        """Запустить игру"""
         pygame.init()
         clock = pygame.time.Clock()
         pygame.display.set_caption("Game of Life")
@@ -53,7 +49,7 @@ class GameOfLife:
         running = True
         while running:
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
 
             # Отрисовка списка клеток
@@ -81,13 +77,10 @@ class GameOfLife:
             Матрица клеток размером `cell_height` х `cell_width`.
         """
         if not randomize:
-            Grid = [
-                [0 for i in range(self.cell_width)] for p in range(self.cell_height)
-            ]
+            Grid = [[0 for i in range(self.cell_width)] for p in range(self.cell_height)]
             return Grid
         Grid = [
-            [random.choice([0, 1]) for i in range(self.cell_width)]
-            for p in range(self.cell_height)
+            [random.choice([0, 1]) for i in range(self.cell_width)] for p in range(self.cell_height)
         ]
         return Grid
 
@@ -139,9 +132,7 @@ class GameOfLife:
 
         x, y = cell
         Cells = []
-        if ((x >= 1) and (x < self.cell_height - 1)) and (
-            (y >= 1) and (y < self.cell_width - 1)
-        ):
+        if ((x >= 1) and (x < self.cell_height - 1)) and ((y >= 1) and (y < self.cell_width - 1)):
             for i in range(x - 1, x + 2):
                 for j in range(y - 1, y + 2):
                     Cells.append(self.grid[i][j])
@@ -165,9 +156,7 @@ class GameOfLife:
                     Cells.append(self.grid[x - 1][y - 1])
                     Cells.append(self.grid[x - 1][y])
                     Cells.append(self.grid[x][y - 1])
-        if ((x == 0) or (x == self.cell_height - 1)) and (
-            (y >= 1) and (y < self.cell_width - 1)
-        ):
+        if ((x == 0) or (x == self.cell_height - 1)) and ((y >= 1) and (y < self.cell_width - 1)):
             if x == 0:
                 for i in range(x, x + 2):
                     for j in range(y - 1, y + 2):
@@ -178,9 +167,7 @@ class GameOfLife:
                     for j in range(y - 1, y + 2):
                         Cells.append(self.grid[i][j])
                 Cells.pop(4)
-        if ((y == 0) or (y == self.cell_width - 1)) and (
-            (x >= 1) and (x < self.cell_height - 1)
-        ):
+        if ((y == 0) or (y == self.cell_width - 1)) and ((x >= 1) and (x < self.cell_height - 1)):
             if y == 0:
                 for i in range(x - 1, x + 2):
                     for j in range(y, y + 2):

@@ -47,9 +47,7 @@ class GameOfLife:
         if not randomize:
             Grid = [[0 for i in range(self.cols)] for p in range(self.rows)]
             return Grid
-        Grid = [
-            [random.choice([0, 1]) for i in range(self.cols)] for p in range(self.rows)
-        ]
+        Grid = [[random.choice([0, 1]) for i in range(self.cols)] for p in range(self.rows)]
         return Grid
 
     def get_neighbours(self, cell: Cell) -> Cells:
@@ -119,9 +117,10 @@ class GameOfLife:
         self.prev_generation = deepcopy(self.curr_generation)
         self.curr_generation = self.get_next_generation()
         self.generations += 1
+        return None
 
     @property
-    def is_max_generations_exceeded(self) -> bool:
+    def is_max_generations_exceeded(self):
         """
         Не превысило ли текущее число поколений максимально допустимое.
         """
@@ -129,6 +128,7 @@ class GameOfLife:
             if self.generations < self.max_generations:
                 return False
             return True
+        return None
 
     @property
     def is_changing(self) -> bool:
@@ -141,8 +141,8 @@ class GameOfLife:
 
     @staticmethod
     def from_file(filename) -> "GameOfLife":
-        """ 
-        Прочитать состояние клеток из указанного файла. 
+        """
+        Прочитать состояние клеток из указанного файла.
         """
         with open(filename, "r") as f:
             line = f.readlines()
@@ -154,8 +154,8 @@ class GameOfLife:
         return game
 
     def save(self, filename) -> None:
-        """ 
-        Сохранить текущее состояние клеток в указанный файл. 
+        """
+        Сохранить текущее состояние клеток в указанный файл.
         """
         with open(filename, "w") as f:
             for row in self.curr_generation:

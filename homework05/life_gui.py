@@ -25,13 +25,9 @@ class GUI(UI):
 
     def draw_lines(self) -> None:
         for x in range(0, self.width, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (x, 0), (x, self.height)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (x, 0), (x, self.height))
         for y in range(0, self.height, self.cell_size):
-            pygame.draw.line(
-                self.screen, pygame.Color("black"), (0, y), (self.width, y)
-            )
+            pygame.draw.line(self.screen, pygame.Color("black"), (0, y), (self.width, y))
 
     def draw_grid(self) -> None:
         # Copy from previous assignment
@@ -69,11 +65,11 @@ class GUI(UI):
             and (self.life.is_changing is True)
         ):
             for event in pygame.event.get():
-                if event.type == QUIT:
+                if event.type == pygame.QUIT:
                     running = False
-                elif event.type == KEYDOWN:
+                elif event.type == pygame.KEYDOWN:
                     pause = not pause
-                elif event.type == MOUSEBUTTONUP:
+                elif event.type == pygame.MOUSEBUTTONUP:
                     i, j = event.pos
                     i = i // self.cell_size
                     j = j // self.cell_size
