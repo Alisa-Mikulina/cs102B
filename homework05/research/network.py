@@ -5,28 +5,38 @@ import community as community_louvain
 import matplotlib.pyplot as plt
 import networkx as nx
 import pandas as pd
-
-from vkapi.friends import get_friends, get_mutual
+from vkapi.friends import FriendsResponse, get_friends, get_mutual
 
 
 def ego_network(
-    user_id: tp.Optional[int] = None, friends: tp.Optional[tp.List[int]] = None
-) -> tp.List[tp.Tuple[int, int]]:
+    user_id: tp.Optional[int] = 448281460, friends: tp.Optional[tp.List[int]] = None
+) -> set[tuple[int, int]]:
     """
     Построить эгоцентричный граф друзей.
-
     :param user_id: Идентификатор пользователя, для которого строится граф друзей.
     :param friends: Идентификаторы друзей, между которыми устанавливаются связи.
     """
-    pass
+    pairs = set()
+    if not friends:
+        friends = []
+        friends_temp = get_friends(user_id).items
+        for friend in friends_temp:
+            friends.append(friend["id"])
+    friends_mut = get_mutual(user_id, target_uids=friends)
+    for i in range(len(friends_mut)):
+        friend_id = friends_mut[i]["id"]
+        for mutual_friend_id in friends_mut[i]["common_friends"]:
+            pairs.add((friend_id, mutual_friend_id))
+    return pairs
 
 
 def plot_ego_network(net: tp.List[tp.Tuple[int, int]]) -> None:
     graph = nx.Graph()
     graph.add_edges_from(net)
     layout = nx.spring_layout(graph)
-    nx.draw(graph, layout, node_size=10, node_color="black", alpha=0.5)
-    plt.title("Ego Network", size=15)
+    partition = community_louvain.best_partition(graph)
+    nx.draw(graph, layout, node_size=15, node_color=list(partition.values()), alpha=0.5)
+    plt.title("Ego Network", size=10)
     plt.show()
 
 
@@ -36,7 +46,7 @@ def plot_communities(net: tp.List[tp.Tuple[int, int]]) -> None:
     layout = nx.spring_layout(graph)
     partition = community_louvain.best_partition(graph)
     nx.draw(graph, layout, node_size=25, node_color=list(partition.values()), alpha=0.8)
-    plt.title("Ego Network", size=15)
+    plt.title("Ego Network", size=10)
     plt.show()
 
 
@@ -66,3 +76,6 @@ def describe_communities(
                     data.append([cluster_n] + [friend.get(field) for field in fields])  # type: ignore
                     break
     return pd.DataFrame(data=data, columns=["cluster"] + fields)
+
+
+# plot_ego_network(ego_network(36832653))
