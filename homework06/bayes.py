@@ -32,8 +32,7 @@ class NaiveBayesClassifier:
     def predict(self, X):
         """Perform classification on an array of test vectors X."""
         return [
-            max(self.class_freq.keys(), key=lambda c: self.calculate_class_freq(x, c))
-            for x in X
+            max(self.class_freq.keys(), key=lambda c: self.calculate_class_freq(x, c)) for x in X
         ]
 
     def calculate_class_freq(self, X, clss):

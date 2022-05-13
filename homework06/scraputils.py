@@ -17,22 +17,16 @@ def extract_news(parser):
     all_authors = [user.text for user in body.findAll("a", {"class": "hnuser"})]
     all_urls = [link["href"] for link in body.findAll("a", {"class": "titlelink"})]
     all_urls = [
-        "https://news.ycombinator.com/" + url if url[:4] == "item" else url
-        for url in all_urls
+        "https://news.ycombinator.com/" + url if url[:4] == "item" else url for url in all_urls
     ]
-    all_points = [
-        score.text.split()[0] for score in body.findAll("span", {"class": "score"})
-    ]
+    all_points = [score.text.split()[0] for score in body.findAll("span", {"class": "score"})]
     all_ids = [post["id"] for post in body.findAll("tr", {"class": "athing"})]
     all_discussions = [
-        body.findAll("span", {"id": f"unv_{id}"})[0]
-        .findNext("a", {"href": f"item?id={id}"})
-        .text
+        body.findAll("span", {"id": f"unv_{id}"})[0].findNext("a", {"href": f"item?id={id}"}).text
         for id in all_ids
     ]
     all_comments = [
-        0 if element.isalpha() else int(element.split()[0])
-        for element in all_discussions
+        0 if element.isalpha() else int(element.split()[0]) for element in all_discussions
     ]
 
     for i, n in enumerate(all_titles):
@@ -51,9 +45,7 @@ def extract_news(parser):
 
 def extract_next_page(parser):
     """Extract next page URL"""
-    next_page = parser.findAll("table")[2].findAll("a", {"class": "morelink"})[0][
-        "href"
-    ]
+    next_page = parser.findAll("table")[2].findAll("a", {"class": "morelink"})[0]["href"]
     return next_page
 
 
