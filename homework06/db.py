@@ -1,9 +1,9 @@
 # type: ignore
+from scraputils import get_news
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from scraputils import get_news
 
 Base = declarative_base()
 engine = create_engine("sqlite:///news.db")
