@@ -9,9 +9,7 @@ from scraputils import get_news
 def news_list():
     s = session()
     rows = s.query(News).filter(News.label == None).all()
-    return template(
-        "C:\\Users\\ASUS\\Desktop\\VK\\homework06\\recommended.tpl", rows=rows
-    )
+    return template("C:\\Users\\ASUS\\Desktop\\VK\\homework06\\recommended.tpl", rows=rows)
 
 
 @route("/add_label/")
@@ -33,8 +31,7 @@ def update_news():
     for cur_news in new_news:
         print(cur_news)
         if (
-            s.query(News).filter(News.author == cur_news["author"], News.title == cur_news["title"]
-            )
+            s.query(News).filter(News.author == cur_news["author"], News.title == cur_news["title"])
         ) is None:
             new_note = News(
                 author=cur_news["author"],
