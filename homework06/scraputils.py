@@ -1,10 +1,8 @@
 # type: ignore
 import random
 import time
-
 import requests
 from bs4 import BeautifulSoup
-
 
 def extract_news(parser):
     """Extract news from a given web page"""

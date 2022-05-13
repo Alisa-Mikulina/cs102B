@@ -4,7 +4,6 @@ from bottle import redirect, request, route, run, template
 from db import News, session
 from scraputils import get_news
 
-
 @route("/news")
 def news_list():
     s = session()

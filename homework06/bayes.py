@@ -2,10 +2,8 @@
 import csv
 import string
 from collections import defaultdict
-
 import numpy as np
 from sklearn.metrics import accuracy_score
-
 
 class NaiveBayesClassifier:
     def __init__(self, alpha=0):
